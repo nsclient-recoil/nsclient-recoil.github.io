@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Loading...</title>
+    
+    <!-- Strict Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data:; img-src 'self' data: https:;">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #050505;
+            --surface-color: rgba(15, 15, 18, 0.7);
+            --primary-accent: #00f0ff;
+            --secondary-accent: #0055ff;
+            --text-main: #8b949e;
+            --text-light: #ffffff;
+            --border-color: rgba(0, 240, 255, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* MAXIMUM CSS SECURITY */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+            opacity: 0; 
+            transition: opacity 0.5s ease-in;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 85, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(0, 240, 255, 0.05) 0%, transparent 50%);
+            background-attachment: fixed;
+            
+            /* Prevent text highlighting completely */
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            user-select: none !important;
+            -webkit-touch-callout: none !important;
+        }
+
+        /* ANTI-IMAGE DRAG SECURITY */
+        img, a {
+            -webkit-user-drag: none !important;
+            user-drag: none !important;
+            -webkit-user-select: none !important;
+        }
+
+        /* PREVENT PRINTING (CTRL+P Bypass) */
+        @media print {
+            html, body {
+                display: none !important;
+                visibility: hidden !important;
+                background: #000 !important;
+                opacity: 0 !important;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-accent); }
+
+        a {
+            color: var(--primary-accent);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        a:hover {
+            color: var(--text-light);
+            text-shadow: 0 0 8px var(--primary-accent);
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo-container img {
+            max-height: 40px;
+            width: auto;
+            display: block;
+            pointer-events: none;
+        }
+
+        .nav-links a {
+            margin-left: 40px;
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-main);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 45vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: -2px;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, var(--text-light), var(--text-main));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(0, 240, 255, 0.1);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            max-width: 600px;
+            font-weight: 300;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto 100px auto;
+            padding: 50px;
+            background: var(--surface-color);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+            position: relative;
+        }
+
+        /* Copy Button */
+        .copy-btn {
+            position: absolute;
+            top: 40px;
+            right: 50px;
+            background: rgba(0, 240, 255, 0.05);
+            color: var(--primary-accent);
+            border: 1px solid var(--border-color);
+            padding: 10px 24px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            pointer-events: auto;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-accent);
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+            border-color: var(--primary-accent);
+        }
+
+        /* Typography */
+        .doc-content {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+        }
+
+        .doc-content h1 {
+            color: var(--text-light);
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-right: 180px; 
+            letter-spacing: -0.5px;
+        }
+
+        .doc-content h2 {
+            color: var(--text-light);
+            font-size: 16px;
+            font-weight: 700;
+            margin: 40px 0 20px 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: inline-block;
+            border-bottom: 2px solid var(--primary-accent);
+            padding-bottom: 4px;
+        }
+
+        .doc-content p, .doc-content li {
+            margin-bottom: 16px;
+            color: #a1aab3;
+        }
+
+        .doc-content ul, .doc-content ol {
+            margin-left: 20px;
+            margin-bottom: 30px;
+        }
+
+        .doc-content li::marker {
+            color: var(--primary-accent);
+            font-weight: bold;
+        }
+
+        .doc-content strong {
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+            margin: 60px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 13px;
+            color: #4b525d;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo-container">
+            <img id="nav-logo" src="" alt="Logo">
+        </a>
+        <div class="nav-links">
+            <a id="link-portal" href="#" target="_blank">Portal</a>
+            <a id="link-discord" href="#" target="_blank">Discord</a>
+            <a id="link-status" href="#" target="_blank">Status</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1 id="hero-title"></h1>
+        <p id="hero-subtitle"></p>
+    </section>
+
+    <main class="container">
+        <button class="copy-btn" id="copyBtn">Copy Text</button>
+        <div class="doc-content" id="guideText"></div>
+    </main>
+
+    <footer id="footer-text"></footer>
+
+    <script>
+        // ==========================================
+        //  ULTIMATE SECURITY LAYER - DO NOT REMOVE
+        // ==========================================
+        (function() {
+            // 1. Frame Busting (Clickjacking Prevention)
+            if (window.top !== window.self) {
+                window.top.location = window.self.location;
+            }
+
+            // Centralized Lockdown Function
+            const lockdown = () => {
+                document.body.innerHTML = '';
+                document.head.innerHTML = '';
+                window.location.replace("about:blank");
+                try { window.close(); } catch (e) {}
+            };
+
+            // 2. Anti-Right Click & Anti-Drag globally
+            document.addEventListener('contextmenu', e => e.preventDefault());
+            document.addEventListener('dragstart', e => e.preventDefault());
+
+            // 3. Strict Keyboard Shortcuts Blocking
+            document.addEventListener('keydown', function(e) {
+                if (
+                    e.keyCode === 123 || // F12
+                    (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) || // Ctrl+Shift+I/J/C
+                    (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 80)) // Ctrl+U/S/P (Source/Save/Print)
+                ) {
+                    e.preventDefault();
+                    lockdown(); // Instantly wipe site on shortcut attempt
+                    return false;
+                }
+            });
+
+            // 4. Aggressive Debugger Trap (Freezes / Detects if DevTools open)
+            setInterval(function() {
+                const startTime = performance.now();
+                debugger; // Freezes here if tools are open
+                const endTime = performance.now();
+                if (endTime - startTime > 100) {
+                    // Time delta indicates debugger was stepped over -> DevTools is open
+                    lockdown();
+                }
+            }, 500);
+
+            // 5. DevTools Docked Detection (Checks if screen size is artificially restricted by devtools)
+            const checkSize = () => {
+                const threshold = 160;
+                if ((window.outerWidth - window.innerWidth > threshold) || 
+                    (window.outerHeight - window.innerHeight > threshold)) {
+                    lockdown();
+                }
+            };
+            window.addEventListener('resize', checkSize);
+            setInterval(checkSize, 1000);
+
+            // 6. Console Spam / Disable
+            setInterval(() => {
+                console.clear();
+                console.log("%cSTOP!", "color: red; font-size: 50px; font-weight: bold; text-shadow: 2px 2px 0 #000;");
+                console.log("%cThis environment is strictly monitored. Tampering will result in a permanent ban.", "color: white; font-size: 16px;");
+            }, 100);
+        })();
+
+        // ==========================================
+        //  SITE CONFIGURATION
+        // ==========================================
+        const SiteConfig = {
+            brand: {
+                pageTitle: "NSClient | Newton Recoil",
+                logoPath: "img/logo.png",
+                logoAltText: "NSClient Logo",
+                footerText: "2026 NSClient | Newton Recoil. All rights reserved."
+            },
+            theme: {
+                backgroundColor: "#050505",
+                surfaceColor: "rgba(15, 15, 18, 0.7)",
+                primaryAccent: "#00f0ff",
+                secondaryAccent: "#0055ff",
+                textMain: "#8b949e",
+                textLight: "#ffffff",
+                borderColor: "rgba(0, 240, 255, 0.15)"
+            },
+            links: {
+                portalUrl: "https://keyauth.cc/panel/jxst_kifoxxxxe/Newton+Recoil+Cheat",
+                discordUrl: "https://discord.gg/WHSB2uJhDA",
+                statusUrl: "https://nsclient.mysellauth.com/status"
+            },
+            hero: {
+                title: "NEWTON RECOIL",
+                subtitle: "The definitive logic engine. Advanced telemetry and stream-proof integration."
+            },
+            guideContent: `
+                <h1>NEWTON RECOIL - ABSOLUTE BEGINNER'S SETUP GUIDE</h1>
+                
+                <p>Welcome to the official Newton Recoil guide. Follow every single instruction below exactly as written. If you skip a step, the software will not work properly.</p>
+
+                <h2>PHASE 1: PREPARING YOUR COMPUTER (CRUCIAL)</h2>
+                <p>Before you even download the software, you must prepare your system. Game security will flag customized external overlays, and Windows Defender will try to falsely delete it. You must do this first:</p>
+                <ol>
+                    <li><strong>Install Visual C++:</strong> Go to the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist" target="_blank">Microsoft Visual C++ Download Page</a>. Download and install BOTH the <strong>x86</strong> and <strong>x64</strong> versions. Restart your computer after installing.</li>
+                    <li><strong>Install DirectX 9:</strong> Go to the <a href="https://www.microsoft.com/en-us/download/details.aspx?id=35" target="_blank">DirectX End-User Runtime Page</a>. Download, open the installer, UNCHECK the Bing Bar option, and complete the installation so the menu overlay can render.</li>
+                    <li><strong>Install an Extractor:</strong> If you don't have one, download <a href="https://www.7-zip.org/" target="_blank">7-Zip</a> or <a href="https://www.win-rar.com/download.html" target="_blank">WinRAR</a> to extract the encrypted files later.</li>
+                    <li><strong>Create an Exclusion Folder:</strong> Right-click on an empty space on your Desktop, click <strong>New</strong>, then click <strong>Folder</strong>. Name it exactly <strong>Newton_Client</strong>.</li>
+                    <li><strong>Disable Real-Time Protection:</strong> Click your Windows Start button at the bottom of your screen, type <strong>Windows Security</strong>, and press Enter. Click <strong>Virus & threat protection</strong>. Under <strong>Virus & threat protection settings</strong>, click <strong>Manage settings</strong>. Toggle <strong>Real-time protection</strong> to OFF.</li>
+                    <li><strong>Add the Exclusion:</strong> On that exact same settings page, scroll down to the bottom and click <strong>Add or remove exclusions</strong>. Click <strong>Yes</strong> to the admin prompt. Click the <strong>+ Add an exclusion</strong> button, select <strong>Folder</strong>, and choose the <strong>Newton_Client</strong> folder you made on your Desktop.</li>
+                </ol>
+
+                <h2>PHASE 2: DOWNLOADING AND UNLOCKING</h2>
+                <ol>
+                    <li><strong>Create an Account:</strong> Navigate to our <a href="PORTAL_LINK_PLACEHOLDER" target="_blank">Official Portal</a>. Click <strong>Register</strong> at the top right, fill out your details, and log in.</li>
+                    <li><strong>Download the Loader:</strong> Once logged into the portal, scroll to the absolute bottom of the main dashboard page. Click the button labeled <strong>Download & Initialize Web Loader</strong>. Save this file directly into the <strong>Newton_Client</strong> folder on your Desktop.</li>
+                    <li><strong>Get the Decryption Key:</strong> Open the <a href="https://discord.com/" target="_blank">Discord app</a> and join our <a href="DISCORD_LINK_PLACEHOLDER" target="_blank">Discord Server</a>. Go to the <strong>#support-tickets</strong> channel. Click the button to open a new ticket. Type "I need my MEGA Decryption Key" and wait for a staff member to reply with your key. Highlight and copy that key.</li>
+                    <li><strong>Extract the Files:</strong> Go into your <strong>Newton_Client</strong> folder on your desktop. Right-click the file you just downloaded, hover your mouse over <strong>7-Zip</strong> (or WinRAR), and click <strong>Extract Here</strong>. When it asks for a password or decryption key, right-click the text box, paste the key you got from Discord, and press Enter.</li>
+                </ol>
+
+                <h2>PHASE 3: LAUNCHING AND INJECTION</h2>
+                <ol>
+                    <li><strong>Run as Administrator:</strong> Inside the <strong>Newton_Client</strong> folder, you will now see the extracted Newton Recoil executable file. Right-click this file and absolutely make sure you click <strong>Run as administrator</strong>. Click <strong>Yes</strong> on the Windows prompt.</li>
+                    <li><strong>Wait for Authentication:</strong> A black console window will appear. Do not click inside it or press any keys on your keyboard. Wait completely until the text inside says exactly <strong>"System Ready"</strong>.</li>
+                    <li><strong>Launch the Game:</strong> Once you see "System Ready", open your game launcher (Steam, Ubisoft, etc.) and start the game.</li>
+                    <li><strong>Set Game Window Settings:</strong> Once loaded into the main menu, go into the game's Video/Display settings. You MUST change your display mode from "Fullscreen" to <strong>"Borderless"</strong> or <strong>"Windowed"</strong>. If you are in Exclusive Fullscreen, the menu will be blocked and will not appear.</li>
+                </ol>
+
+                <h2>PHASE 4: CONFIGURING YOUR SETTINGS</h2>
+                <p>Once you are in a live match or the shooting range, follow these exact steps to configure your setup:</p>
+                <ol>
+                    <li><strong>Open the Menu:</strong> Look at the right side of your keyboard and press the <strong>RIGHT SHIFT</strong> key to make the Newton UI appear on your screen.</li>
+                    <li><strong>Adjust Recoil Control:</strong> Click the <strong>Recoil</strong> tab. Left-click and drag the <strong>Vertical</strong> slider to counter the up-kick of your specific weapon. Drag the <strong>Horizontal</strong> slider to counter the left/right sway. Test shoot against a wall and tweak until it fires in a straight dot.</li>
+                    <li><strong>Set Delays (Optional):</strong> If you want the script to wait a fraction of a second before pulling down, adjust the <strong>Start Delay</strong> and <strong>Fire Delay</strong> sliders. Use the <strong>Burst Time</strong> slider if you only want the engine to control the first few shots of a spray.</li>
+                    <li><strong>Add Humanization:</strong> Click the <strong>Humanization</strong> tab. This is mandatory for looking legitimate. Increase the <strong>Smoothing</strong> slider so the mouse pull looks smooth and natural, preventing instantaneous robotic snapping. Increase the <strong>Randomness (Jitter)</strong> slightly to add human-like micro-imperfections to the spray pattern.</li>
+                    <li><strong>Enable Visuals:</strong> Click the <strong>Visuals</strong> tab. Click the checkbox for <strong>Recoil Dot</strong>. This will place a small marker on your screen so you can visually see exactly where the engine is moving your cursor internally.</li>
+                </ol>
+
+                <h2>PHASE 5: SAVING & SAFE STREAMING</h2>
+                <ol>
+                    <li><strong>Save Your Config:</strong> Once your gun shoots exactly how you want it, click the <strong>Config</strong> tab. Click inside the text box, type the name of the gun (e.g., "Assault_Rifle_1"), and click the <strong>Save</strong> button. You can click on this name to load it instantly next time you play.</li>
+                    <li><strong>Enable Stream Proof:</strong> If you are recording footage via <a href="https://obsproject.com/" target="_blank">OBS Studio</a> or streaming to your friends on Discord, click the <strong>Settings</strong> tab. Click the <strong>Hide From Capture</strong> checkbox. The Newton overlay, menu, and recoil dot will instantly become 100% invisible to your viewers or recording software, but you will still see it perfectly on your monitor.</li>
+                    <li><strong>Safe Exit:</strong> When you are done playing, NEVER close the software by clicking the X on the console window or using Task Manager. Press <strong>RIGHT SHIFT</strong> to open the menu, go to the <strong>Settings</strong> tab, and click <strong>Exit Software</strong>. This safely clears your memory and properly unhooks the engine.</li>
+                </ol>
+
+                <hr>
+
+                <h2>TROUBLESHOOTING & COMMON FIXES</h2>
+                
+                <p><strong>Issue: "Missing VCRUNTIME140.dll or MSVCP140.dll" error on launch.</strong><br>
+                Fix: You skipped Phase 1, Step 1. Install both the x86 and x64 versions of the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist" target="_blank">Microsoft Visual C++ Redistributables</a>, run the installers, and restart your PC.</p>
+
+                <p><strong>Issue: The menu won't open when pressing Right Shift.</strong><br>
+                Fix: <br>
+                1. Ensure you actually right-clicked and ran the Loader as Administrator in Phase 3.<br>
+                2. Double-check your game Video settings. It MUST be set to Borderless or Windowed mode. Exclusive Fullscreen blocks external overlays.</p>
+
+                <p><strong>Issue: The software deletes itself as soon as I extract it.</strong><br>
+                Fix: Your Antivirus is detecting the memory hooks and eating the file. Go back to Phase 1, Step 5 and 6. Turn off Real-Time protection and make absolutely sure you added the folder exclusion correctly.</p>
+
+                <p><strong>Issue: The console gets stuck on loading and never says "System Ready".</strong><br>
+                Fix: Your connection to our authentication servers is failing. Turn off any VPNs or Firewalls. If it still fails, check our server status announcements in the <a href="DISCORD_LINK_PLACEHOLDER" target="_blank">Discord Server</a>.</p>
+            `
+        };
+
+        // ==========================================
+        //  PAGE BUILDER (DO NOT MODIFY)
+        // ==========================================
+        document.addEventListener("DOMContentLoaded", () => {
+            // Apply Theme
+            const root = document.documentElement;
+            root.style.setProperty('--bg-color', SiteConfig.theme.backgroundColor);
+            root.style.setProperty('--surface-color', SiteConfig.theme.surfaceColor);
+            root.style.setProperty('--primary-accent', SiteConfig.theme.primaryAccent);
+            root.style.setProperty('--secondary-accent', SiteConfig.theme.secondaryAccent);
+            root.style.setProperty('--text-main', SiteConfig.theme.textMain);
+            root.style.setProperty('--text-light', SiteConfig.theme.textLight);
+            root.style.setProperty('--border-color', SiteConfig.theme.borderColor);
+
+            // Populate Content
+            document.title = SiteConfig.brand.pageTitle;
+            
+            // Set Logo Image
+            const logoImg = document.getElementById('nav-logo');
+            logoImg.src = SiteConfig.brand.logoPath;
+            logoImg.alt = SiteConfig.brand.logoAltText;
+
+            document.getElementById('footer-text').innerHTML = `&copy; ${SiteConfig.brand.footerText}`;
+            document.getElementById('hero-title').innerText = SiteConfig.hero.title;
+            document.getElementById('hero-subtitle').innerText = SiteConfig.hero.subtitle;
+
+            // Links
+            document.getElementById('link-portal').href = SiteConfig.links.portalUrl;
+            document.getElementById('link-discord').href = SiteConfig.links.discordUrl;
+            document.getElementById('link-status').href = SiteConfig.links.statusUrl;
+
+            // Guide Content Replacements
+            let content = SiteConfig.guideContent;
+            content = content.replace(/PORTAL_LINK_PLACEHOLDER/g, SiteConfig.links.portalUrl);
+            content = content.replace(/DISCORD_LINK_PLACEHOLDER/g, SiteConfig.links.discordUrl);
+            document.getElementById('guideText').innerHTML = content;
+
+            // Show page
+            document.body.style.opacity = 1;
+        });
+
+        // Copy Function
+        document.getElementById('copyBtn').addEventListener('click', function() {
+            const content = document.getElementById('guideText').innerText;
+            const textarea = document.createElement('textarea');
+            textarea.value = content;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            
+            const originalText = this.innerText;
+            this.innerText = 'COPIED TO CLIPBOARD';
+            this.style.backgroundColor = 'var(--primary-accent)';
+            this.style.color = '#000';
+            
+            setTimeout(() => {
+                this.innerText = originalText;
+                this.style.backgroundColor = 'rgba(0, 240, 255, 0.05)';
+                this.style.color = 'var(--primary-accent)';
+            }, 2500);
+        });
+    </script>
+</body>
+</html>
